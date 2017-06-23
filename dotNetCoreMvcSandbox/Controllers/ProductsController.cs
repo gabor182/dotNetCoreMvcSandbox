@@ -144,7 +144,7 @@ namespace dotNetCoreMvcSandbox.Controllers
             return RedirectToAction("Index");
         }
 
-        private bool ProductExists(int id)
+        private bool ProductExists(long id)
         {
             return _context.Product.Any(e => e.Id == id);
         }

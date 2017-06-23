@@ -8,9 +8,10 @@ using dotNetCoreMvcSandbox.Models;
 namespace dotNetCoreMvcSandbox.Migrations
 {
     [DbContext(typeof(ProductsContext))]
-    partial class ProductsContextModelSnapshot : ModelSnapshot
+    [Migration("20170623124439_AddCartItemNavigationProps")]
+    partial class AddCartItemNavigationProps
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.2")

@@ -8,9 +8,10 @@ using dotNetCoreMvcSandbox.Models;
 namespace dotNetCoreMvcSandbox.Migrations
 {
     [DbContext(typeof(ProductsContext))]
-    partial class ProductsContextModelSnapshot : ModelSnapshot
+    [Migration("20170623123941_CartRefactorWithItems")]
+    partial class CartRefactorWithItems
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.2")
@@ -45,8 +46,6 @@ namespace dotNetCoreMvcSandbox.Migrations
 
                     b.HasIndex("CartId");
 
-                    b.HasIndex("ProductId");
-
                     b.ToTable("CartItem");
                 });
 
@@ -68,14 +67,9 @@ namespace dotNetCoreMvcSandbox.Migrations
 
             modelBuilder.Entity("dotNetCoreMvcSandbox.Models.CartItem", b =>
                 {
-                    b.HasOne("dotNetCoreMvcSandbox.Models.Cart", "Cart")
+                    b.HasOne("dotNetCoreMvcSandbox.Models.Cart")
                         .WithMany("CartItems")
                         .HasForeignKey("CartId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("dotNetCoreMvcSandbox.Models.Product", "Product")
-                        .WithMany()
-                        .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
         }
