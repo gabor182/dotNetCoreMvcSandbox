@@ -7,5 +7,8 @@ namespace dotNetCoreMvcSandbox.Models
 {
     public class Cart
     {
+        public long Id { get; set; }
+        public string SessionId { get; set; }
+        public List<Product> Products { get; set; }
     }
 }
