@@ -8,8 +8,8 @@ using dotNetCoreMvcSandbox.Models;
 namespace dotNetCoreMvcSandbox.Migrations
 {
     [DbContext(typeof(ProductsContext))]
-    [Migration("20170625193353_CreateUserTable")]
-    partial class CreateUserTable
+    [Migration("20170625194411_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
