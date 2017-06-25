@@ -34,6 +34,14 @@ namespace dotNetCoreMvcSandbox
 
             services.AddDbContext<ProductsContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("ProductsContext")));
+
+            // Add a default in-memory implementation of IDistributedCache.
+            services.AddDistributedMemoryCache();
+            // Add service required to handle sessions.
+            services.AddSession(options =>
+            {
+                options.CookieName = ".MvcSandbox.Session";
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -54,6 +62,7 @@ namespace dotNetCoreMvcSandbox
 
             app.UseStaticFiles();
 
+            app.UseSession();
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
