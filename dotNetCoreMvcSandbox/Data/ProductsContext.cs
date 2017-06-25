@@ -13,8 +13,9 @@ namespace dotNetCoreMvcSandbox.Models
         {
         }
 
-        public DbSet<Product> Product { get; set; }
         public DbSet<Cart> Cart { get; set; }
         public DbSet<CartItem> CartItem { get; set; }
+        public DbSet<Product> Product { get; set; }
+        public DbSet<User> User { get; set; }
     }
 }
