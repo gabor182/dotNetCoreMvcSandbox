@@ -7,7 +7,7 @@ using dotNetCoreMvcSandbox.Models;
 
 namespace dotNetCoreMvcSandbox.Migrations
 {
-    [DbContext(typeof(ProductsContext))]
+    [DbContext(typeof(ApplicationDbContext))]
     partial class ProductsContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)

@@ -7,7 +7,7 @@ using dotNetCoreMvcSandbox.Models;
 
 namespace dotNetCoreMvcSandbox.Migrations
 {
-    [DbContext(typeof(ProductsContext))]
+    [DbContext(typeof(ApplicationDbContext))]
     [Migration("20170625194411_Initial")]
     partial class Initial
     {

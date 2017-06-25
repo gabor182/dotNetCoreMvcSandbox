@@ -32,7 +32,7 @@ namespace dotNetCoreMvcSandbox
             // Add framework services.
             services.AddMvc();
 
-            services.AddDbContext<ProductsContext>(options =>
+            services.AddDbContext<ApplicationDbContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("ProductsContext")));
 
             // Add a default in-memory implementation of IDistributedCache.

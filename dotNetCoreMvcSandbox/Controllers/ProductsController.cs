@@ -11,9 +11,9 @@ namespace dotNetCoreMvcSandbox.Controllers
 {
     public class ProductsController : Controller
     {
-        private readonly ProductsContext _context;
+        private readonly ApplicationDbContext _context;
 
-        public ProductsController(ProductsContext context)
+        public ProductsController(ApplicationDbContext context)
         {
             _context = context;    
         }

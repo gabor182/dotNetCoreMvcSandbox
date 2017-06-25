@@ -6,9 +6,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace dotNetCoreMvcSandbox.Models
 {
-    public class ProductsContext : DbContext
+    public class ApplicationDbContext : DbContext
     {
-        public ProductsContext (DbContextOptions<ProductsContext> options)
+        public ApplicationDbContext (DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
         }
