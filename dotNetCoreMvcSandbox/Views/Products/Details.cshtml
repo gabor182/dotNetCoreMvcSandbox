@@ -31,6 +31,13 @@
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    <button type="button" class="btn btn-success">
+        <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>&nbsp;&nbsp;Add to cart
+    </button>
+    <a class="btn btn-warning" asp-action="Edit" asp-route-id="@Model.Id">
+        <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>&nbsp;&nbsp;Edit
+    </a>
+    <a class="btn btn-primary" asp-action="Index">
+        <span class="glyphicon glyphicon-list" aria-hidden="true"></span>&nbsp;&nbsp;Back to list
+    </a>
 </div>
