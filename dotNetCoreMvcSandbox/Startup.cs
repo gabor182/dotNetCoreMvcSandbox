@@ -41,6 +41,7 @@ namespace dotNetCoreMvcSandbox
             services.AddSession(options =>
             {
                 options.CookieName = ".MvcSandbox.Session";
+                options.IdleTimeout = TimeSpan.FromMinutes(30);
             });
         }
 
