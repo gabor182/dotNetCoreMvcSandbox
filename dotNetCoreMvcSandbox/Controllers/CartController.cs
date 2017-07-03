@@ -57,7 +57,7 @@ namespace dotNetCoreMvcSandbox.Controllers
                 Cart = cart,
                 Product = product,
                 Price = product.Price,
-                Quantity = 1
+                Quantity = qty
             };
         }
 
