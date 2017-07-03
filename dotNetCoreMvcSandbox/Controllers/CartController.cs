@@ -23,43 +23,75 @@ namespace dotNetCoreMvcSandbox.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Add(long id)
+        public async Task<IActionResult> Add([FromBody] long id)
         {
-            //if (id == 0)
-            //{
-            //    return NotFound();
-            //}
+            if (id == 0)
+            {
+                return NotFound();
+            }
 
-            //var cart = await _context.Cart.SingleOrDefaultAsync(x => x.SessionId == "1");
-            //if (cart == null)
-            //{
-            //    var newCart = new Cart
-            //    {
-            //        SessionId = "1"
-            //    };
+            var product = await _context.Product.SingleOrDefaultAsync(x => x.Id == id);
+            if (product == null)
+            {
+                return NotFound();
+            }
 
-            //    await _context.Cart.AddAsync(newCart);
-            //}
+            var (cart, isCartNew) = await GetCartBySessionIdAsync("1");
 
-            //CartItem currentItem = cart.CartItems.FirstOrDefault(x => x.ProductId == id);
+            var cartItem = AddToCart(cart, product);
 
-            //if (currentItem == null)
-            //{
-            //    var newItem = new CartItem
-            //    {
-            //        Cart = cart,
-                    
-            //    }
-            //    cart.CartItems.Add()
-            //}
-            //else
-            //{
-            //    currentItem.Quantity++;
-            //}
+            if (isCartNew)
+            {
+                await _context.AddAsync(cart);
+            }
 
-            //await _context.SaveChangesAsync();
+            await _context.SaveChangesAsync();
 
-            //return View();
+            return View();
+        }
+
+        private CartItem GetCartItemInstance(Cart cart, Product product, double price, int qty = 1)
+        {
+            return new CartItem
+            {
+                Cart = cart,
+                Product = product,
+                Price = product.Price,
+                Quantity = 1
+            };
+        }
+
+        private async Task<(Cart cart, bool isNew)> GetCartBySessionIdAsync(string sessionId)
+        {
+            bool isNewInstance = false;
+            var cart = await _context.Cart.SingleOrDefaultAsync(x => x.SessionId == sessionId);
+
+            if (cart == null)
+            {
+                cart = new Cart
+                {
+                    SessionId = sessionId
+                };
+                isNewInstance = true;
+            }
+
+            return (cart: cart, isNew: isNewInstance);
+        }
+
+        private CartItem AddToCart(Cart cart, Product product)
+        {
+            CartItem item = cart.CartItems.FirstOrDefault(x => x.Product == product);
+            if (item == null)
+            {
+                item = GetCartItemInstance(cart, product, product.Price);
+                cart.CartItems.Add(item);
+            }
+            else
+            {
+                item.Quantity++;
+            }
+
+            return item;
         }
     }
 }
