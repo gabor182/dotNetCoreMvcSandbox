@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using dotNetCoreMvcSandbox.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Http;
+using dotNetCoreMvcSandbox.Extensions;
 
 namespace dotNetCoreMvcSandbox.Controllers
 {
@@ -36,14 +38,19 @@ namespace dotNetCoreMvcSandbox.Controllers
                 return NotFound();
             }
 
-            var (cart, isCartNew) = await GetCartBySessionIdAsync("1");
+            var cart = await _context.Cart.SingleOrDefaultAsync(x => x.SessionId == HttpContext.Session.Id);
 
-            var cartItem = AddToCart(cart, product);
-
-            if (isCartNew)
+            if (cart == null)
             {
+                cart = new Cart
+                {
+                    SessionId = HttpContext.Session.Id
+                };
+
                 await _context.AddAsync(cart);
             }
+
+            var cartItem = AddToCart(cart, product);
 
             await _context.SaveChangesAsync();
 
@@ -59,23 +66,6 @@ namespace dotNetCoreMvcSandbox.Controllers
                 Price = product.Price,
                 Quantity = qty
             };
-        }
-
-        private async Task<(Cart cart, bool isNew)> GetCartBySessionIdAsync(string sessionId)
-        {
-            bool isNewInstance = false;
-            var cart = await _context.Cart.SingleOrDefaultAsync(x => x.SessionId == sessionId);
-
-            if (cart == null)
-            {
-                cart = new Cart
-                {
-                    SessionId = sessionId
-                };
-                isNewInstance = true;
-            }
-
-            return (cart: cart, isNew: isNewInstance);
         }
 
         private CartItem AddToCart(Cart cart, Product product)

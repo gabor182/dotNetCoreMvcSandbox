@@ -9,6 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
 using dotNetCoreMvcSandbox.Models;
+using dotNetCoreMvcSandbox.Extensions;
 
 namespace dotNetCoreMvcSandbox
 {
@@ -64,6 +65,7 @@ namespace dotNetCoreMvcSandbox
             app.UseStaticFiles();
 
             app.UseSession();
+
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
