@@ -25,28 +25,24 @@ namespace dotNetCoreMvcSandbox.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Add([FromBody] long id)
+        [Produces("application/json")]
+        public async Task<JsonResult> Add([FromBody] long id)
         {
             if (id == 0)
             {
-                return NotFound();
+                return Json(false);
             }
 
             var product = await _context.Product.SingleOrDefaultAsync(x => x.Id == id);
             if (product == null)
             {
-                return NotFound();
+                return Json(false);
             }
 
             var cart = await _context.Cart.SingleOrDefaultAsync(x => x.SessionId == HttpContext.Session.Id);
-
             if (cart == null)
             {
-                cart = new Cart
-                {
-                    SessionId = HttpContext.Session.Id
-                };
-
+                cart = CreateCartInstance(HttpContext.Session.Id);
                 await _context.AddAsync(cart);
             }
 
@@ -54,10 +50,10 @@ namespace dotNetCoreMvcSandbox.Controllers
 
             await _context.SaveChangesAsync();
 
-            return View();
+            return Json(true);
         }
 
-        private CartItem GetCartItemInstance(Cart cart, Product product, double price, int qty = 1)
+        private CartItem CreateCartItemInstance(Cart cart, Product product, double price, int qty = 1)
         {
             return new CartItem
             {
@@ -68,12 +64,20 @@ namespace dotNetCoreMvcSandbox.Controllers
             };
         }
 
+        private Cart CreateCartInstance(string sessionId)
+        {
+            return new Cart
+            {
+                SessionId = sessionId
+            };
+        }
+
         private CartItem AddToCart(Cart cart, Product product)
         {
             CartItem item = cart.CartItems.FirstOrDefault(x => x.Product == product);
             if (item == null)
             {
-                item = GetCartItemInstance(cart, product, product.Price);
+                item = CreateCartItemInstance(cart, product, product.Price);
                 cart.CartItems.Add(item);
             }
             else
