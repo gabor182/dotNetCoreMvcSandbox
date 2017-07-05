@@ -42,7 +42,7 @@
                 <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Id"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span>&nbsp;&nbsp;Delete</a>
             </td>
             <td>
-                <button type="button" class="btn btn-success">
+                <button type="button" class="btn btn-success cartAdd" data-productId="@item.Id" data-addUri="@Url.RouteUrl("default", new { controller = "Cart", action = "Add"})" >
                     <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>&nbsp;&nbsp;Add to cart
                 </button>
             </td>

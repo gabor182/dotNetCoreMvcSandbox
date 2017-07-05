@@ -30,13 +30,13 @@ namespace dotNetCoreMvcSandbox.Controllers
         {
             if (id == 0)
             {
-                return Json(false);
+                return Json(new { success = false, message = "Invalid ProductId." });
             }
 
             var product = await _context.Product.SingleOrDefaultAsync(x => x.Id == id);
             if (product == null)
             {
-                return Json(false);
+                return Json(new { success = false, message = "Could not find product in database." });
             }
 
             var cart = await _context.Cart.SingleOrDefaultAsync(x => x.SessionId == HttpContext.Session.Id);
@@ -50,7 +50,7 @@ namespace dotNetCoreMvcSandbox.Controllers
 
             await _context.SaveChangesAsync();
 
-            return Json(true);
+            return Json(new { success = true, count = cart.CartItems.Count, sum = cart.CartItems.Sum(x => x.Price) });
         }
 
         private CartItem CreateCartItemInstance(Cart cart, Product product, double price, int qty = 1)
