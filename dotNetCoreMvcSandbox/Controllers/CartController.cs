@@ -39,7 +39,7 @@ namespace dotNetCoreMvcSandbox.Controllers
                 return Json(new { success = false, message = "Could not find product in database." });
             }
 
-            var cart = await _context.Cart.SingleOrDefaultAsync(x => x.SessionId == HttpContext.Session.Id);
+            var cart = HttpContext.Session.Get<Cart>("Cart");
             if (cart == null)
             {
                 cart = CreateCartInstance(HttpContext.Session.Id);
@@ -49,6 +49,7 @@ namespace dotNetCoreMvcSandbox.Controllers
             var cartItem = AddToCart(cart, product);
 
             await _context.SaveChangesAsync();
+            HttpContext.Session.Set("Cart", cart);
 
             return Json(new { success = true, count = cart.CartItems.Count, sum = cart.CartItems.Sum(x => x.Price) });
         }
