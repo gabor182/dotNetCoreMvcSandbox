@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 
 namespace dotNetCoreMvcSandbox.Models
 {
-    [JsonObject(IsReference = true)]
     public class CartItem
     {
         public long Id { get; set; }
@@ -15,9 +14,8 @@ namespace dotNetCoreMvcSandbox.Models
         public double Price { get; set; }
         public int Quantity { get; set; }
 
-        [JsonIgnore]
         public Cart Cart { get; set; }
-        [JsonIgnore]
+
         public Product Product { get; set; }
     }
 }
