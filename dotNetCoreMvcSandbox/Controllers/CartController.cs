@@ -21,7 +21,13 @@ namespace dotNetCoreMvcSandbox.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            var cart = HttpContext.Session.Get<Cart>("Cart");
+            if (cart == null)
+            {
+
+            }
+
+            return View(cart);
         }
 
         [HttpPost]
@@ -51,7 +57,12 @@ namespace dotNetCoreMvcSandbox.Controllers
             await _context.SaveChangesAsync();
             HttpContext.Session.Set("Cart", cart);
 
-            return Json(new { success = true, count = cart.CartItems.Count, sum = cart.CartItems.Sum(x => x.Price) });
+            return Json(new
+            {
+                success = true,
+                count = cart.CartItems.Count * cart.CartItems.Sum(x => x.Quantity),
+                sum = cart.CartItems.Sum(x => x.Price * x.Quantity)
+            });
         }
 
         private CartItem CreateCartItemInstance(Cart cart, Product product, double price, int qty = 1)
@@ -75,7 +86,7 @@ namespace dotNetCoreMvcSandbox.Controllers
 
         private CartItem AddToCart(Cart cart, Product product)
         {
-            CartItem item = cart.CartItems.FirstOrDefault(x => x.Product == product);
+            CartItem item = cart.CartItems.FirstOrDefault(x => x.ProductId == product.Id);
             if (item == null)
             {
                 item = CreateCartItemInstance(cart, product, product.Price);
