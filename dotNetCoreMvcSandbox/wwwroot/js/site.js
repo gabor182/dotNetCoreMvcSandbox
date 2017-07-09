@@ -1,5 +1,5 @@
 ﻿// Write your Javascript code.
-$(function () {
+(function ($) {
     $(document).ready(function () {
         $(".cartAdd").click(function () {
             var productId = $(this).attr("data-productId");
