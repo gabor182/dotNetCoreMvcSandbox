@@ -1,7 +1,37 @@
 
+@model dotNetCoreMvcSandbox.Models.Cart
+
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Cart";
 }
 
 <h2>Cart</h2>
-
+<div class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Product</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th>Total</th>
+                    <th>&nbsp;</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.CartItems)
+                {
+                    <tr>
+                        <td><a href="@Url.RouteUrl("default", new { controller = "Products", action= "Details", id = @item.ProductId })">@item.Product.Name</a></td>
+                        <td>$@item.Price</td>
+                        <td>@item.Quantity</td>
+                        <td>$@(@item.Quantity * @item.Price)</td>
+                        <td>
+                            <!-- Buttons -->
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
