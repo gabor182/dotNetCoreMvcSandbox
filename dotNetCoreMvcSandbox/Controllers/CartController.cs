@@ -30,6 +30,26 @@ namespace dotNetCoreMvcSandbox.Controllers
             return View(cart);
         }
 
+        [Produces("application/json")]
+        public JsonResult Info()
+        {
+            var cart = HttpContext.Session.Get<Cart>("Cart");
+            int productCount = 0;
+            double productPriceSum = 0.0;
+
+            if (cart != null)
+            {
+                productCount = cart.CartItems.Count * cart.CartItems.Sum(x => x.Quantity);
+                productPriceSum = cart.CartItems.Sum(x => x.Price * x.Quantity);
+            }
+
+            return Json(new
+            {
+                count = productCount,
+                sum = productPriceSum
+            });
+        }
+
         [HttpPost]
         [Produces("application/json")]
         public async Task<JsonResult> Add([FromBody] long id)

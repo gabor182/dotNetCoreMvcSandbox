@@ -37,7 +37,7 @@
                     <li><a asp-area="" asp-controller="Home" asp-action="About">About</a></li>
                     <li><a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>
                 </ul>
-                <p class="navbar-text navbar-right">
+                <p class="navbar-text navbar-right hidden" id="cart-info">
                     <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>&nbsp;&nbsp;
                     <a href="@Url.RouteUrl("default", new { controller = "Cart", action = "Index" })" class="navbar-link">
                         <span id="cart-count">0</span> | $<span id="cart-sum">0</span>
