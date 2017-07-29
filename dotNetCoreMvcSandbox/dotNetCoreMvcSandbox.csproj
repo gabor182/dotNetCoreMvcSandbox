@@ -7,6 +7,16 @@
   <PropertyGroup>
     <PackageTargetFallback>$(PackageTargetFallback);portable-net45+win8+wp8+wpa81;</PackageTargetFallback>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="wwwroot\lib\angular2\.angular-cli.json" />
+    <Content Include="wwwroot\lib\angular2\e2e\tsconfig.e2e.json" />
+    <Content Include="wwwroot\lib\angular2\package.json" />
+    <Content Include="wwwroot\lib\angular2\src\tsconfig.app.json" />
+    <Content Include="wwwroot\lib\angular2\src\tsconfig.spec.json" />
+    <Content Include="wwwroot\lib\angular2\tsconfig.json" />
+    <Content Include="wwwroot\lib\angular2\tslint.json" />
+  </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.1.0" />
     <PackageReference Include="Microsoft.AspNetCore" Version="1.1.2" />
@@ -32,6 +42,30 @@
     <Folder Include="Migrations\" />
     <Folder Include="Views\Cart\" />
     <Folder Include="Views\Heroes\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="wwwroot\lib\angular2\.editorconfig" />
+    <None Include="wwwroot\lib\angular2\.gitignore" />
+    <None Include="wwwroot\lib\angular2\e2e\app.e2e-spec.ts" />
+    <None Include="wwwroot\lib\angular2\e2e\app.po.ts" />
+    <None Include="wwwroot\lib\angular2\karma.conf.js" />
+    <None Include="wwwroot\lib\angular2\protractor.conf.js" />
+    <None Include="wwwroot\lib\angular2\README.md" />
+    <None Include="wwwroot\lib\angular2\src\app\app.component.css" />
+    <None Include="wwwroot\lib\angular2\src\app\app.component.html" />
+    <None Include="wwwroot\lib\angular2\src\app\app.component.spec.ts" />
+    <None Include="wwwroot\lib\angular2\src\app\app.component.ts" />
+    <None Include="wwwroot\lib\angular2\src\app\app.module.ts" />
+    <None Include="wwwroot\lib\angular2\src\assets\.gitkeep" />
+    <None Include="wwwroot\lib\angular2\src\environments\environment.prod.ts" />
+    <None Include="wwwroot\lib\angular2\src\environments\environment.ts" />
+    <None Include="wwwroot\lib\angular2\src\favicon.ico" />
+    <None Include="wwwroot\lib\angular2\src\index.html" />
+    <None Include="wwwroot\lib\angular2\src\main.ts" />
+    <None Include="wwwroot\lib\angular2\src\polyfills.ts" />
+    <None Include="wwwroot\lib\angular2\src\styles.css" />
+    <None Include="wwwroot\lib\angular2\src\test.ts" />
+    <None Include="wwwroot\lib\angular2\src\typings.d.ts" />
   </ItemGroup>
 
 </Project>
