@@ -4,7 +4,7 @@
 /dist
 /tmp
 /out-tsc
-wwwroot/lib/angular2
+/wwwroot/lib/angular2
 
 # dependencies
 /node_modules
