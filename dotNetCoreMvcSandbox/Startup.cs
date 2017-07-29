@@ -10,6 +10,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
 using dotNetCoreMvcSandbox.Models;
 using dotNetCoreMvcSandbox.Extensions;
+using System.IO;
 
 namespace dotNetCoreMvcSandbox
 {
@@ -61,6 +62,17 @@ namespace dotNetCoreMvcSandbox
             {
                 app.UseExceptionHandler("/Home/Error");
             }
+
+            app.Use(async (context, next) => {
+                await next();
+                if (context.Response.StatusCode == 404 &&
+                   !Path.HasExtension(context.Request.Path.Value) &&
+                   !context.Request.Path.Value.StartsWith("/api/"))
+                {
+                    context.Request.Path = "/index.html";
+                    await next();
+                }
+            });
 
             app.UseStaticFiles();
 
