@@ -7,13 +7,6 @@
   <PropertyGroup>
     <PackageTargetFallback>$(PackageTargetFallback);portable-net45+win8+wp8+wpa81;</PackageTargetFallback>
   </PropertyGroup>
-
-  <ItemGroup>
-    <Compile Remove="wwwroot\lib\angular2\**" />
-    <Content Remove="wwwroot\lib\angular2\**" />
-    <EmbeddedResource Remove="wwwroot\lib\angular2\**" />
-    <None Remove="wwwroot\lib\angular2\**" />
-  </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.1.0" />
     <PackageReference Include="Microsoft.AspNetCore" Version="1.1.2" />
@@ -39,6 +32,7 @@
     <Folder Include="Migrations\" />
     <Folder Include="Views\Cart\" />
     <Folder Include="Views\Heroes\" />
+    <Folder Include="wwwroot\lib\angular2\" />
   </ItemGroup>
 
 </Project>
