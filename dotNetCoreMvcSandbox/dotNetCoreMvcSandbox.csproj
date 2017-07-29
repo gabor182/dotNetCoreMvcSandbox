@@ -38,4 +38,9 @@
     <Folder Include="wwwroot\lib\angular2\" />
   </ItemGroup>
 
+  <Target Name="Build Angular" Condition="'$(Configuration)'=='Release'" BeforeTargets="Build">
+    <Message Text="* * * * * * Building Angular App * * * * * *" Importance="high" />
+    <Exec Command="ng build -prod -aot" />
+  </Target>
+
 </Project>
